@@ -8,7 +8,7 @@ function Home() {
   const getMovies = async () => {
     const json = await (
       await fetch(
-        `https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year`
+        `https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year`
       )
     ).json();
     setMovies(json.data.movies);
@@ -17,12 +17,17 @@ function Home() {
   useEffect(() => {
     getMovies();
   }, []);
+  // useEffect(() => {
+  //   console.log(movies);
+  // }, [movies]);
   return (
-    <div>
+    <div className={styles.container}>
       {loading ? (
-        <h1>Loading...</h1>
+        <div className={styles.loader}>
+          <h1>Loading...</h1>
+        </div>
       ) : (
-        <div className={styles.movieContainer}>
+        <div className={styles.movies}>
           {movies.map((movie) => (
             <Movie
               key={movie.id}
@@ -31,6 +36,8 @@ function Home() {
               title={movie.title}
               genres={movie.genres}
               summary={movie.summary}
+              year={movie.year}
+              rating={movie.rating}
             />
           ))}
         </div>
