@@ -1,0 +1,9 @@
+.movie {
+  width: 100%;
+}
+.movie > img {
+  width: 70%;
+}
+.title {
+  font-size: 20px;
+}
